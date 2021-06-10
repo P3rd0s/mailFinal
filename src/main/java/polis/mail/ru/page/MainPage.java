@@ -7,6 +7,8 @@ import io.qameta.atlas.webdriver.extension.Param;
 
 public interface MainPage extends WebPage {
 
+    public final static String GROUPS = "t,userAltGroup";
+
     @FindBy(".//a[@data-l='{{ text }}']")
-    AtlasWebElement navigateTo(@Param("text") String text);
+    AtlasWebElement navigateButton(@Param("text") String text);
 }

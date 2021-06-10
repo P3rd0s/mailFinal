@@ -10,6 +10,9 @@ public class GroupSteps extends AbstractSteps{
     private GroupPage page;
 
 
+
+
+
     public GroupSteps(Atlas atlas, WebDriver driver) {
         this.atlas = atlas;
         this.driver = driver;
@@ -17,14 +20,14 @@ public class GroupSteps extends AbstractSteps{
     }
 
     @Step("Select Visibility")
-    public GroupSteps selectVisibility(){
-        page.visibilitySettings().click();
+    public GroupSteps selectVisibility(String cur_option){
+        page.visibilitySettingsMenu(cur_option).click();
         return this;
     }
 
     @Step("Change Visibility")
-    public GroupSteps changeVisibilityToOpen(){
-        page.changeVisibility(page.VIS_OPEN).click();
+    public GroupSteps changeVisibilityToOpen(String new_option){
+        page.visibilityOptionsList(new_option).click();
         return this;
     }
 

@@ -19,7 +19,7 @@ public class MainPageSteps extends AbstractSteps{
 
     @Step("Navigate to")
     public MainPageSteps navigateTo(String text) {
-        page.navigateTo(text);
+        page.navigateButton(text);
         return this;
     }
 }

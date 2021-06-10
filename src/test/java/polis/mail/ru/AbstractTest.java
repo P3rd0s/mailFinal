@@ -16,6 +16,9 @@ public abstract class AbstractTest {
     NavigationSteps navigationSteps;
     protected WebDriver driver;
 
+    final static String USERNAME = "";
+    final static String PASSWORD = "";
+
     @Before
     public void startDriver() {
         WebDriverManager.chromedriver().setup();
@@ -25,8 +28,8 @@ public abstract class AbstractTest {
 
         navigationSteps
                 .openLoginPage()
-                .fillEmail()
-                .fillPassword()
+                .fillEmail(USERNAME)
+                .fillPassword(PASSWORD)
                 .clickLogin();
     }
 

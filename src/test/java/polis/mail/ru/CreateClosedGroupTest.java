@@ -3,16 +3,19 @@ package polis.mail.ru;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CreateClosedGroupTest extends AbstractTest{
+
+    final static String TYPE_INTEREST = "t,INTEREST";
+    final static String GROUP_NAME = "Test1";
+    final static String VIS_OPEN = "OPEN";
+    final static String VIS_SECRET = "BY_MEMBER_INVITATION";
+    final static String VIS_CLOSED = "BY_MEMBER_INVITATION_AND_REQUEST";
+    final static String THEME_AUTO = "CAR_WASH";
 
 
     @Test
@@ -21,7 +24,11 @@ public class CreateClosedGroupTest extends AbstractTest{
         navigationSteps
                 .openGroupsPage()
                 .clickCreateGroup()
-                .fillData();
+                .chooseGroupType(TYPE_INTEREST)
+                .enterGroupName(GROUP_NAME)
+                .selectTheme(THEME_AUTO)
+                .selectVisibility(VIS_CLOSED)
+                .confirmCreation();
 
 
         String groupURL = driver.getCurrentUrl();
@@ -34,7 +41,6 @@ public class CreateClosedGroupTest extends AbstractTest{
 
         assertThat(isClosedGroup(groupURL), is(true));
 
-        return;
     }
 
 

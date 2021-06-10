@@ -9,8 +9,6 @@ public class LoginSteps extends AbstractSteps{
 
     private LoginPage page;
 
-    final static String USERNAME = "79267612747";
-    final static String PASSWORD = "ksdjfnjsdfnksdlf23r423n";
 
     public LoginSteps(Atlas atlas, WebDriver driver) {
         this.driver = driver;
@@ -18,20 +16,15 @@ public class LoginSteps extends AbstractSteps{
         this.page = atlas.create(driver, LoginPage.class);
     }
 
-    @Step("Wait login page is loaded")
-    public LoginSteps waitPageIsLoaded() {
-        return this;
-    }
-
     @Step("Fill mail field")
-    public LoginSteps fillEmail() {
-        page.searchInput("field_email").sendKeys(USERNAME);
+    public LoginSteps fillEmail(String username) {
+        page.searchInput("field_email").sendKeys(username);
         return this;
     }
 
     @Step("Fill password field")
-    public LoginSteps fillPassword() {
-        page.searchInput("field_password").sendKeys(PASSWORD);
+    public LoginSteps fillPassword(String password) {
+        page.searchInput("field_password").sendKeys(password);
         return this;
     }
 

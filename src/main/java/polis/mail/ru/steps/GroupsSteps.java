@@ -26,31 +26,64 @@ public class GroupsSteps extends AbstractSteps {
 
     @Step("Click crete group")
     public GroupsSteps clickCreateGroup() {
-        page.createGroup().click();
+        page.createGroupButton().click();
         return this;
     }
 
-    @Step("Fill data")
-    public GroupsSteps fillData() {
 
-        page.chooseType(page.TYPE_INTEREST).click();
-        page.enterGroupName().sendKeys(page.GROUP_NAME);
-
-        page.chooseTheme().click();
-        page.selectConcreteTheme(page.THEME_AUTO).click();
-
-        page.chooseVisibility().click();
-
-        page.confirmCreation().click();
-
-        page.pageLoaded().waitUntil(displayed());
+    @Step("Choose group type")
+    public GroupsSteps chooseGroupType(String type) {
+        page.groupMaintypesList(type).click();
         return this;
     }
+
+    @Step("Enter group name")
+    public GroupsSteps enterGroupName(String groupName) {
+        page.groupNameField().sendKeys(groupName);
+        return this;
+    }
+
+    @Step("Select group theme")
+    public GroupsSteps selectTheme(String theme) {
+        page.themeField().click();
+        page.themesList(theme).click();
+        return this;
+    }
+
+    @Step("Select group visibility")
+    public GroupsSteps selectVisibility(String option) {
+        page.closedVisibilityOption(option).click();
+        return this;
+    }
+
+    @Step("Confirm group creation")
+    public GroupsSteps confirmCreation(){
+        page.confirmCreationButton().click();
+        page.groupName().waitUntil(displayed());
+        return this;
+    }
+
+//    @Step("Fill data")
+//    public GroupsSteps fillData() {
+//
+//        page.groupMaintypesList(page.TYPE_INTEREST).click();
+//        page.groupNameField().sendKeys(page.GROUP_NAME);
+//
+//        page.themeField().click();
+//        page.themesList(page.THEME_AUTO).click();
+//
+//        page.closedVisibilityOption().click();
+//
+//        page.confirmCreationButton().click();
+//
+//        page.groupName().waitUntil(displayed());
+//        return this;
+//    }
 
     @Step("Select moderaetd")
     public GroupsSteps selectModerated() {
-        page.selectModerateGroups().click();
-        page.selectModerateGroups().waitUntil(displayed());
+        page.moderateGroupsButton().click();
+        page.moderateGroupsButton().waitUntil(displayed());
         return this;
     }
 
@@ -76,10 +109,13 @@ public class GroupsSteps extends AbstractSteps {
     }
 
     @Step("Select first group")
-    public GroupsSteps selectFirstGroup() {
+    public GroupsSteps selectGroup(int num) {
 
-        page.moderatedGroupsCards().get(0).groupName().click();
-        page.pageLoaded().waitUntil(displayed());
+        if (num < 0)
+            return this;
+
+        page.moderatedGroupsCards().get(num).groupName().click();
+        page.groupName().waitUntil(displayed());
 
         return this;
     }

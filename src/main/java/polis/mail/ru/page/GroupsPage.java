@@ -11,45 +11,39 @@ import polis.mail.ru.element.ModerateGroupCard;
 
 public interface GroupsPage extends WebPage {
 
-    final static String TYPE_INTEREST = "t,INTEREST";
-    final static String GROUP_NAME = "Test1";
-    final static String VIS_OPEN = "Открытый";
-    final static String VIS_SECRET = "Секретный";
-    final static String VIS_CLOSED = "Закрытый";
-    final static String THEME_AUTO = "CAR_WASH";
+
 
 
 
 
 
     @FindBy(".//div[@class='create-group']/a")
-    AtlasWebElement createGroup();
+    AtlasWebElement createGroupButton();
 
     @FindBy(".//a[@data-l='{{ type }}']")
-    AtlasWebElement chooseType(@Param("type") String type);
+    AtlasWebElement groupMaintypesList(@Param("type") String type);
 
     @FindBy(".//input[@id='field_name']")
-    AtlasWebElement enterGroupName();
+    AtlasWebElement groupNameField();
 
-    @FindBy(".//label[@for='field_visibility_BY_MEMBER_INVITATION_AND_REQUEST']")
-    AtlasWebElement chooseVisibility();
+    @FindBy(".//label[@for='field_visibility_{{ vis_option }}']")
+    AtlasWebElement closedVisibilityOption(@Param("vis_option") String vis_option);
 
     @FindBy(".//div[@data-module='GroupCategorySelect']/div[contains(@class,'multi-select_trigger')]")
-    AtlasWebElement chooseTheme();
+    AtlasWebElement themeField();
 
-    //@FindBy(".//div[@data-value='Автомобили']")
     @FindBy(value = "div[data-id='Category_{{ category }}']", selector = Selector.CSS)
-    AtlasWebElement selectConcreteTheme(@Param("category") String category);
+    AtlasWebElement themesList(@Param("category") String category);
 
     @FindBy(".//input[@data-l='t,confirm']")
-    AtlasWebElement confirmCreation();
+    AtlasWebElement confirmCreationButton();
 
 
     @FindBy(".//a[contains(@hrefattrs,'MODERATED_BY_USER')]")
-    AtlasWebElement selectModerateGroups();
+    AtlasWebElement moderateGroupsButton();
 
     @FindBy(".//h1[@class='group-name_h']")
-    AtlasWebElement pageLoaded();
+    AtlasWebElement groupName();
 
 
     @FindBy(".//div[@class='ugrid_i']")

@@ -10,7 +10,6 @@ import static java.lang.String.format;
 public class NavigationSteps {
 
     private final static String BASE_URL = "https://ok.ru/";
-    final static String GROUPS = "t,userAltGroup";
 
     private Atlas atlas;
     private WebDriver driver;
@@ -23,7 +22,7 @@ public class NavigationSteps {
 
     @Step("Open login page")
     public LoginSteps openLoginPage() {
-        driver.get("https://ok.ru/");
+        driver.get(BASE_URL);
         return new LoginSteps(atlas, driver);
     }
 
@@ -33,7 +32,7 @@ public class NavigationSteps {
         MainPage page;
 
         page = atlas.create(driver, MainPage.class);
-        page.navigateTo(GROUPS).click();
+        page.navigateButton(page.GROUPS).click();
         return new GroupsSteps(atlas, driver);
     }
 
