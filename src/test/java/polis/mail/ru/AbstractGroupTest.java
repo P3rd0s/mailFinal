@@ -11,13 +11,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import polis.mail.ru.steps.NavigationSteps;
 
-public abstract class AbstractTest {
+public abstract class AbstractGroupTest {
 
     NavigationSteps navigationSteps;
     protected WebDriver driver;
 
     final static String USERNAME = "";
     final static String PASSWORD = "";
+
+    final static String TYPE_INTEREST = "t,INTEREST";
+    final static String GROUP_NAME = "Test1";
+    final static String VIS_OPEN = "OPEN";
+    final static String VIS_SECRET = "BY_MEMBER_INVITATION";
+    final static String VIS_CLOSED = "BY_MEMBER_INVITATION_AND_REQUEST";
+    final static String THEME_AUTO = "CAR_WASH";
 
     @Before
     public void startDriver() {
@@ -38,11 +45,28 @@ public abstract class AbstractTest {
         this.driver.quit();
     }
 
+    public void createDefaultClosedGroup() {
+        navigationSteps
+                .openGroupsPage()
+                .clickCreateGroup()
+                .chooseGroupType(TYPE_INTEREST)
+                .enterGroupName(GROUP_NAME)
+                .selectTheme(THEME_AUTO)
+                .selectVisibility(VIS_CLOSED)
+                .confirmCreation();
+    }
+
+    public void deleteGroup(String url) {
+        driver.manage().window().maximize();
+        navigationSteps
+                .openGroupPage(url)
+                .clickMoreButton()
+                .deleteGroup();
+    }
 
     public boolean isClosedGroup(String URL){
         WebDriver secondDriver = new ChromeDriver();
         secondDriver.get(URL);
-
 
         try {
             secondDriver.findElement(By.xpath(".//span[@class='group-name_badge iblock-cloud_show']"));

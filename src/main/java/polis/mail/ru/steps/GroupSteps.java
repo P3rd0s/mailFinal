@@ -3,14 +3,12 @@ package polis.mail.ru.steps;
 import io.qameta.allure.Step;
 import io.qameta.atlas.core.Atlas;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import polis.mail.ru.page.GroupPage;
 
 public class GroupSteps extends AbstractSteps{
 
     private GroupPage page;
-
-
-
 
 
     public GroupSteps(Atlas atlas, WebDriver driver) {
@@ -36,4 +34,20 @@ public class GroupSteps extends AbstractSteps{
         page.submitButton().click();
         return this;
     }
+
+    @Step("Click expand actions")
+    public GroupSteps clickMoreButton() {
+        page.groupExpandActionButton().click();
+        return this;
+    }
+
+    @Step("Delete group")
+    public GroupSteps deleteGroup() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(page.deleteGroupButton().getWrappedElement()).perform();
+        page.deleteGroupButton().click();
+        page.confirmButton().click();
+        return this;
+    }
+
 }

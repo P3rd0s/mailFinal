@@ -42,9 +42,15 @@ public class NavigationSteps {
         return this;
     }
 
+    @Step("Open group page settings")
+    public GroupSteps openGroupPageSettings(String url) {
+        driver.get(url + "/settings");
+        return new GroupSteps(atlas, driver);
+    }
+
     @Step("Open group page")
-    public GroupSteps openGroupPage() {
-        driver.get(driver.getCurrentUrl() + "/settings");
+    public GroupSteps openGroupPage(String url) {
+        driver.get(url);
         return new GroupSteps(atlas, driver);
     }
 

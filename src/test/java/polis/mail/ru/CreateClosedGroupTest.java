@@ -1,5 +1,6 @@
 package polis.mail.ru;
 
+import org.junit.After;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -7,31 +8,17 @@ import org.junit.runners.MethodSorters;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CreateClosedGroupTest extends AbstractTest{
+public class CreateClosedGroupTest extends AbstractGroupTest {
 
-    final static String TYPE_INTEREST = "t,INTEREST";
-    final static String GROUP_NAME = "Test1";
-    final static String VIS_OPEN = "OPEN";
-    final static String VIS_SECRET = "BY_MEMBER_INVITATION";
-    final static String VIS_CLOSED = "BY_MEMBER_INVITATION_AND_REQUEST";
-    final static String THEME_AUTO = "CAR_WASH";
 
+    String groupURL;
 
     @Test
-    public void createClosedGroup() {
+    public void checkCreatedClosedGroup() {
 
-        navigationSteps
-                .openGroupsPage()
-                .clickCreateGroup()
-                .chooseGroupType(TYPE_INTEREST)
-                .enterGroupName(GROUP_NAME)
-                .selectTheme(THEME_AUTO)
-                .selectVisibility(VIS_CLOSED)
-                .confirmCreation();
+        createDefaultClosedGroup();
 
-
-        String groupURL = driver.getCurrentUrl();
+        groupURL = driver.getCurrentUrl();
 
         navigationSteps
                 .goHome()
@@ -44,6 +31,10 @@ public class CreateClosedGroupTest extends AbstractTest{
     }
 
 
+    @After
+    public void cleaning() {
+        deleteGroup(groupURL);
+    }
 
 }
 

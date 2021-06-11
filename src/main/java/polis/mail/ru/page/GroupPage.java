@@ -16,7 +16,15 @@ public interface GroupPage extends WebPage {
     @FindBy(value = "div[data-id='{{ category }}']", selector = Selector.CSS)
     AtlasWebElement visibilityOptionsList(@Param("category") String category);
 
-//    @FindBy(".//input[@value='Сохранить']")
     @FindBy(value = "input[name='button_save_settings']", selector = Selector.CSS)
     AtlasWebElement submitButton();
+
+    @FindBy(".//li[@class='u-menu_li expand-action-item']")
+    AtlasWebElement groupExpandActionButton();
+
+    @FindBy(".//a[contains(@hrefattrs, 'ButtonsRemoveAltGroup')]")
+    AtlasWebElement deleteGroupButton();
+
+    @FindBy(".//input[@data-l='t,confirm']")
+    AtlasWebElement confirmButton();
 }
